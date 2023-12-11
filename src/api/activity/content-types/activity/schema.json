@@ -20,11 +20,17 @@
       "type": "text"
     },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "domain": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::domain.domain"
     }
   }
 }

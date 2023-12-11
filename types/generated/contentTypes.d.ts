@@ -362,6 +362,108 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiActivityActivity extends Schema.CollectionType {
+  collectionName: 'activities';
+  info: {
+    singularName: 'activity';
+    pluralName: 'activities';
+    displayName: 'Activity';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    images: Attribute.Media;
+    domain: Attribute.Relation<
+      'api::activity.activity',
+      'oneToOne',
+      'api::domain.domain'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::activity.activity',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::activity.activity',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactContact extends Schema.SingleType {
+  collectionName: 'contacts';
+  info: {
+    singularName: 'contact';
+    pluralName: 'contacts';
+    displayName: 'Contact';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    firstname: Attribute.String & Attribute.Required;
+    lastname: Attribute.String & Attribute.Required;
+    email: Attribute.Email & Attribute.Required;
+    address: Attribute.String;
+    phone: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDomainDomain extends Schema.CollectionType {
+  collectionName: 'domains';
+  info: {
+    singularName: 'domain';
+    pluralName: 'domains';
+    displayName: 'Domain';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::domain.domain',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::domain.domain',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -677,103 +779,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiActivityActivity extends Schema.CollectionType {
-  collectionName: 'activities';
-  info: {
-    singularName: 'activity';
-    pluralName: 'activities';
-    displayName: 'Activity';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text;
-    images: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::activity.activity',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::activity.activity',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiContactContact extends Schema.SingleType {
-  collectionName: 'contacts';
-  info: {
-    singularName: 'contact';
-    pluralName: 'contacts';
-    displayName: 'Contact';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    firstname: Attribute.String & Attribute.Required;
-    lastname: Attribute.String & Attribute.Required;
-    email: Attribute.Email & Attribute.Required;
-    address: Attribute.String;
-    phone: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::contact.contact',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::contact.contact',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiDomainDomain extends Schema.CollectionType {
-  collectionName: 'domains';
-  info: {
-    singularName: 'domain';
-    pluralName: 'domains';
-    displayName: 'Domain';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::domain.domain',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::domain.domain',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -784,15 +789,15 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::activity.activity': ApiActivityActivity;
+      'api::contact.contact': ApiContactContact;
+      'api::domain.domain': ApiDomainDomain;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::activity.activity': ApiActivityActivity;
-      'api::contact.contact': ApiContactContact;
-      'api::domain.domain': ApiDomainDomain;
     }
   }
 }
