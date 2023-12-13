@@ -24,6 +24,12 @@
           "localized": true
         }
       }
+    },
+    "activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity.activity",
+      "mappedBy": "domain"
     }
   }
 }

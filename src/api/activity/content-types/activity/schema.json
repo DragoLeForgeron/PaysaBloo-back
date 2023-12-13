@@ -48,8 +48,9 @@
     },
     "domain": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::domain.domain"
+      "relation": "manyToOne",
+      "target": "api::domain.domain",
+      "inversedBy": "activities"
     }
   }
 }

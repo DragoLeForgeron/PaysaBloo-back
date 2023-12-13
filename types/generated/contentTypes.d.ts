@@ -400,7 +400,7 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       }>;
     domain: Attribute.Relation<
       'api::activity.activity',
-      'oneToOne',
+      'manyToOne',
       'api::domain.domain'
     >;
     createdAt: Attribute.DateTime;
@@ -485,6 +485,11 @@ export interface ApiDomainDomain extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    activities: Attribute.Relation<
+      'api::domain.domain',
+      'oneToMany',
+      'api::activity.activity'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
